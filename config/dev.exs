@@ -72,3 +72,7 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :stripity_stripe,
+  api_key: System.get_env("STRIPE_SECRET"),
+  stripe_webhook_secret: System.get_env("STRIPE_WEBHOOK_SIGNING_SECRET")

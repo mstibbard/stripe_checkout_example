@@ -38,6 +38,11 @@ defmodule StripeCheckoutExampleWeb.Endpoint do
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
+  plug Stripe.WebhookPlug,
+    at: "/webhook/stripe",
+    handler: StripeCheckoutExampleWeb.StripeHandler,
+    secret: {Application, :fetch_env!, [:stripity_stripe, :stripe_webhook_secret]}
+
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
