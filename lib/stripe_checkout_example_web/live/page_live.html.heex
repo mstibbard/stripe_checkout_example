@@ -1,0 +1,12 @@
+<h1>LiveView-based Checkout trigger</h1>
+
+<%= for item <- @items do %>
+  <button phx-click="checkout" phx-value-id={item}>Trigger checkout <%= item %></button>
+<% end %>
+
+<h2>Checkouts</h2>
+<ul>
+<%= for checkout <- @checkouts do %>
+  <li><strong>Name:</strong> <%= checkout.name %> · <strong>Amount:</strong> <%= checkout.amount %> · <strong>Payment ID:</strong> <%= checkout.payment_intent_id %></li>
+<% end %>
+</ul>
