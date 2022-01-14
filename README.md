@@ -1,19 +1,35 @@
-# StripeCheckoutExample
+# Stripe Checkout with Phoenix LiveView
 
-To start your Phoenix server:
+This repo covers the 3 major steps to implementing Stripe Checkout
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+1. Prepare your app to handle a Stripe webhook response
+2. Triggering a Stripe Checkout
+3. **TO DO**: Managing prices from Stripe
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## Write-up / instructions
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+I wrote up a brief guide that goes alongside this repo, you can find that [here](https://www.stibbard.io/learning/elixir-phoenix-stripe-checkout)
 
-## Learn more
+## Getting started
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+1. Clone this repo with `git clone https://github.com/mstibbard/stripe_checkout_example.git` and `cd stripe_checkout_example`
+
+2. Rename the `.env.example` file to `.env` and populate it with your Stripe keys
+
+```
+export STRIPE_SECRET=secret_here
+export STRIPE_WEBHOOK_SIGNING_SECRET=whsec_secret_here
+```
+
+3. **Temporary step until price management implemented**: Add your price_id and tax_ids from Stripe in the following lines of `lib/stripe_checkout_example_web/live/page_live.ex`
+
+```elixir
+price_id = "price_HARD_CODED_PRICE_HERE"
+tax_id = "txr_HARD_CODED_TAX_HERE"
+```
+
+4. Run `mix deps.get && mix deps.compile`
+
+5. Run `mix ecto.setup`
+
+6. Run `mix phx.server` and visit `localhost:4000`
