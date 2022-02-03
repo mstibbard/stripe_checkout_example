@@ -1,7 +1,7 @@
 defmodule StripeCheckoutExampleWeb.PageLive do
   use StripeCheckoutExampleWeb, :live_view
 
-  alias StripeCheckoutExample.Checkouts
+  alias StripeCheckoutExample.{Checkouts, StripeCache}
 
   @impl true
   def mount(_params, _session, socket) do
@@ -32,10 +32,8 @@ defmodule StripeCheckoutExampleWeb.PageLive do
 
   @impl true
   def handle_info({:create_payment_intent, id: id}, socket) do
-    IO.inspect(id)
-
-    price_id = "price_HARD_CODED_PRICE_HERE"
-    tax_id = "txr_HARD_CODED_TAX_HERE"
+    {:ok, price_id} = StripeCache.get_price_id("feature-item")
+    {:ok, tax_id} = StripeCache.get_tax_rate_id("AU")
     url = StripeCheckoutExampleWeb.Endpoint.url()
 
     create_params = %{

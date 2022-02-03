@@ -15,9 +15,10 @@ defmodule StripeCheckoutExample.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: StripeCheckoutExample.PubSub},
       # Start the Endpoint (http/https)
-      StripeCheckoutExampleWeb.Endpoint
+      StripeCheckoutExampleWeb.Endpoint,
       # Start a worker by calling: StripeCheckoutExample.Worker.start_link(arg)
       # {StripeCheckoutExample.Worker, arg}
+      StripeCheckoutExample.StripeCache
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
